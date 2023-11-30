@@ -12,7 +12,7 @@ const studyRequestSchema = new mongoose.Schema({
         min: Number,
         max: Number,
     },
-    userId: String
+    user_id: String
 })
 
 exports.StudyRequestModel = mongoose.model("studyRequests", studyRequestSchema);

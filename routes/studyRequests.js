@@ -3,7 +3,7 @@ const { auth, authAdmin } = require("../middlewares/auth");
 const { StudyRequestModel, validateStudyRequest } = require("../models/studyRequestModel")
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/requestsList", async (req, res) => {
     let perPage = Math.min(req.query.perPage, 20) || 4;
     let page = req.query.page || 1;
     let sort = req.query.sort || "_id";
@@ -30,7 +30,7 @@ router.get("/search", async (req, res) => {
         let queryS = req.query.s;
         // cancle the case senstive
         let searchReg = new RegExp(queryS, "i")
-        let data = await StudyRequestModel.find({ name: searchReg })
+        let data = await StudyRequestModel.find({ topics: { $in: [searchReg] } })
             .limit(50)
         res.status(201).json(data);
     }

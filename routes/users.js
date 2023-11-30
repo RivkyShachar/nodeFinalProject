@@ -33,7 +33,7 @@ router.get("/usersList", authAdmin , async(req,res) => {
 })
 
 // create new user
-router.post("/", async(req,res) => {
+router.post("/register", async(req,res) => {
   let validBody = validUser(req.body);
 
   if(validBody.error){

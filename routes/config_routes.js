@@ -1,11 +1,9 @@
 const indexR = require("./index");
 const usersR = require("./users");
-const tablesR = require("./tables");
+const studyRequestsR = require("./studyRequests");
 
 exports.routesInit = (app) => {
   app.use("/",indexR);
   app.use("/users",usersR);
-  app.use("/tables",tablesR)
+  app.use("/studyRequests",studyRequestsR)
 }
-
-// add here all the routes you have

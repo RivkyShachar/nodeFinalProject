@@ -17,7 +17,7 @@ const studyRequestSchema = new mongoose.Schema({
 
 exports.StudyRequestModel = mongoose.model("studyRequests", studyRequestSchema);
 
-exports.validateTable = (_reqBody) => {
+exports.validateStudyRequest = (_reqBody) => {
     let schemaJoi = Joi.object({
         topics: Joi.array().items(Joi.string()).min(1).required(),
         preferredLanguages: Joi.array().items(Joi.string()).min(1).required(),

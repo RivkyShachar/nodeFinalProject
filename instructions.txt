@@ -1,0 +1,43 @@
+copy paste this folder
+in package.json change the name to folder name
+create reposetory
+
+if you cloned this template {
+create .env and .gitignore files
+
+in .env write
+PORT=
+USER_DB=
+PASS_DB=
+TOKEN_SECRET=
+
+in .gitignore write
+/node_modules
+/.env
+}
+
+
+in terminal
+npm install
+git init
+git add .
+git commit -m "init my node template"
+
+then do push
+
+if in the env you have more that the template
+then update the config/secret.js also
+
+in db/nongoconnect.js change the link to the atlas link
+need to get it from mongo atlas 
+database + connect+ connect compass + I have MongoDB Compass installed
+then copy paste the link to nongoconnect
+
+fill the tablesSchema and validateTable--schemaJoi in evey model you build models/tableModel
+
+to routes/config_routes add all the routes you have
+
+in the database need to do uniqe for emails and ect. 
+
+
+change password and delete a user need to write the function

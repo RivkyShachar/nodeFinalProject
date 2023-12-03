@@ -3,7 +3,7 @@ const { auth, authAdmin } = require("../middlewares/auth");
 const { StudyRequestModel, validateStudyRequest } = require("../models/studyRequestModel")
 const router = express.Router();
 
-router.get("/requestsList", async (req, res) => {
+router.get("/requestsList",authAdmin, async (req, res) => {
     let perPage = Math.min(req.query.perPage, 20) || 4;
     let page = req.query.page || 1;
     let sort = req.query.sort || "_id";
@@ -12,6 +12,28 @@ router.get("/requestsList", async (req, res) => {
     try {
         let data = await StudyRequestModel
             .find({})
+            .limit(perPage)
+            .skip((page - 1) * perPage)
+            .sort({ [sort]: reverse })
+        res.status(201).json(data);
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json({ msg: "err", err })
+    }
+
+})
+
+// get all the requests that the user has posted - by token
+router.get("/myStudyRequests",auth, async (req, res) => {
+    let perPage = Math.min(req.query.perPage, 20) || 4;
+    let page = req.query.page || 1;
+    let sort = req.query.sort || "_id";
+    let reverse = req.query.reverse == "yes" ? -1 : 1;
+
+    try {
+        let data = await StudyRequestModel
+            .find({user_id: req.tokenData._id})
             .limit(perPage)
             .skip((page - 1) * perPage)
             .sort({ [sort]: reverse })

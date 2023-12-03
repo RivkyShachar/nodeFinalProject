@@ -5,7 +5,7 @@ const { config } = require("../config/secret")
 
 let userSchema = new mongoose.Schema({
     name: String,
-    email: String,
+    email: {type: String, unique: true},
     password: String,
     date_created: {
         type: Date, default: Date.now()

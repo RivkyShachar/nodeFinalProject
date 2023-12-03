@@ -34,7 +34,7 @@ exports.validateStudyRequest = (_reqBody) => {
             }),
         }),
         studyDuration: Joi.object({
-            min: Joi.number().required().min(0),
+            min: Joi.number().required().min(5),
             max: Joi.number().required().min(Joi.ref('min')),
         }).required(),
     })

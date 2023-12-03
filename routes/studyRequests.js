@@ -46,21 +46,34 @@ router.get("/myStudyRequests",auth, async (req, res) => {
 
 })
 
-// /search?s= topic
+//search by language and topic
 router.get("/search", async (req, res) => {
+    let perPage = req.query.perPage || 10;
+    let page = req.query.page || 1;
+  
     try {
-        let queryS = req.query.s;
-        // cancle the case senstive
-        let searchReg = new RegExp(queryS, "i")
-        let data = await StudyRequestModel.find({ topics: { $in: [searchReg] } })
-            .limit(50)
-        res.status(201).json(data);
-    }
+      let queryT = req.query.topic;
+      let queryL = req.query.language;
+      let searchTopicReg = new RegExp(queryT, "i");
+      let searchLanguageReg = new RegExp(queryL, "i");
+  
+      let data = await StudyRequestModel.find({
+        $and: [
+          { topics: { $in: [searchTopicReg] } },
+          { preferredLanguages: { $in: [searchLanguageReg] } }
+        ]
+      })
+        .limit(perPage)
+        .skip((page - 1) * perPage)
+        .sort({ _id: -1 });
+  
+      res.status(201).json(data);
+    } 
     catch (err) {
-        console.log(err);
-        res.status(500).json({ msg: "there is an error try again later", err })
-    }
-})
+      console.log(err);
+      res.status(500).json({ msg: "There was an error. Please try again later.", err });
+    }
+  });
 
 router.post("/", auth, async (req, res) => {
     let validBody = validateStudyRequest(req.body);

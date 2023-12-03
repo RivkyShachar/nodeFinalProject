@@ -46,7 +46,7 @@ router.get("/myStudyRequests",auth, async (req, res) => {
 
 })
 
-// /search?s=
+// /search?s= topic
 router.get("/search", async (req, res) => {
     try {
         let queryS = req.query.s;

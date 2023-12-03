@@ -81,13 +81,13 @@
                     </tr>
                     <tr>
                         <td>GET</td>
-                        <td><a href="users/usersList">users/usersList</a></td>
+                        <td><a href="users/usersList">/users/usersList</a></td>
                         <td class="text-center">none</td>
                         <td>Get list of all users - by token admin.</td>
                     </tr>
                     <tr>
                         <td>POST</td>
-                        <td>/users/register</td>
+                        <td><a href="/users/register">/users/register</a></td>
                         <td>
                             <pre>{
     "name": "Rivky",
@@ -101,7 +101,7 @@
                     </tr>
                     <tr>
                         <td>POST</td>
-                        <td>/users/login</td>
+                        <td><a href="/users/login">/users/login</a></td>
                         <td>
                             <pre>{
     "email": "Rivky@gmail.com",
@@ -114,16 +114,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>DELETE</td>
-                        <td>/users/{idDel}</td>
-                        <td></td>
-                        <td>Delete a user from the data base. <strong> Admin token can delete every user , and user can
-                                delete only himself.</strong>
-                        </td>
-                    </tr>
-                    <tr>
                         <td>PUT</td>
-                        <td>/users/{idEdit}</td>
+                        <td><a href="/users/{idEdit}">/users/{idEdit}</a></td>
                         <td>
                             <pre>
 fullName: {
@@ -134,9 +126,22 @@ lastName: Gabay
 "password": "Maor31kd3Fg8"
                              </pre>
                         </td>
-                        <td>Update your user in the data base,<strong> Admin token can edit every user data , and user
-                                can
-                                edit only himself.</strong>
+                        <td>Update your user in the data base,<strong> Admin token can edit every user.</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>DELETE</td>
+                        <td><a href="/users/{idDel}">/users/{idDel}</a></td>
+                        <td class="text-center">none</td>
+                        <td>Delete a user from the data base. <strong> You need a valid token.</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>DELETE</td>
+                        <td><a href="/users/deleteAccount">/users/deleteAccount</a></td>
+                        <td class="text-center">none</td>
+                        <td>Delete a user from the data base. <strong> Admin token can delete every user , and user can
+                                delete only himself.</strong>
                         </td>
                     </tr>
                 </tbody>
@@ -170,13 +175,13 @@ lastName: Gabay
                 <tbody>
                     <tr>
                         <td>GET</td>
-                        <td><a href="https://api-toys.cyclic.app//toys">/toys</a></td>
+                        <td><a href="/studyRequests/requestsList">/requestsList</a></td>
                         <td class="text-center">none</td>
                         <td>Get a list of all the toys, will present 10 results per page.</td>
                     </tr>
                     <tr>
                         <td>GET</td>
-                        <td><a href="https://api-toys.cyclic.app/toys/search?s=doll">/toys/search?s=doll</a></td>
+                        <td><a href="/studyRequests/myStudyRequests">/myStudyRequests</a></td>
                         <td class="text-center">none</td>
                         <td>search for a toy by searching follwing name or info after the "s=", it will present 10
                             results per page.
@@ -184,14 +189,12 @@ lastName: Gabay
                     </tr>
                     <tr>
                         <td>GET</td>
-                        <td><a
-                                href="https://api-toys.cyclic.app/toys/prices?min=50&max=200">/toys/prices?min=50&max=200</a>
-                        </td>
+                        <td><a href="/studyRequests/search">/search</a></td>
                         <td class="text-center">none</td>
                         <td>Get a list of the toys by min & max , it will present 10 results per page.</td>
                     </tr>
                     <tr>
-                        <td>GET</td>
+                        <td>GET מיותר</td>
                         <td><a href="https://api-toys.cyclic.app/toys/category/doll">/toys/category/:catName</a></td>
                         <td class="text-center">none</td>
                         <td>Get a list of all the toys in toys <strong>category</strong>, it will present 10 results per
@@ -199,7 +202,7 @@ lastName: Gabay
                     </tr>
                     <tr>
                         <td>POST</td>
-                        <td>/toys</td>
+                        <td><a href="/studyRequests">/studyRequests</a></td>
                         <td>
                             <pre>
 
@@ -222,7 +225,7 @@ lastName: Gabay
                     </tr>
                     <tr>
                         <td>PUT</td>
-                        <td>/toys/ID </td>
+                        <td><a href="/studyRequests/{idEdit}">/studyRequests/{idEdit}</a></td>
                         <td>
                             <pre>
 {
@@ -238,7 +241,7 @@ lastName: Gabay
                     </tr>
                     <tr>
                         <td>DELETE</td>
-                        <td>/toys/ID</td>
+                        <td><a href="/studyRequests/{idDel}">/studyRequests/{idDel}</a></td>
                         <td class="text-center">none</td>
                         <td>Delete a toy from the data base, <strong>You need a token for this query.</strong></td>
                     </tr>

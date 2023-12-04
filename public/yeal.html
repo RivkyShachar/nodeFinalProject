@@ -3,30 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-
-</body>
-
-</html>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- boodstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <!-- css only -->
     <link rel="stylesheet" href="index.css">
-
-    <title>CHAVRUTA API</title>
+    <title>STUDY API</title>
 </head>
 
 <body>
@@ -34,7 +17,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-light py-2 shadow">
             <div class="container-fluid">
-                <a class="navbar-brand myScale" href="https://nodechavruta.onrender.com">CHAVRUTA API</a>
+                <a class="navbar-brand myScale" href="#">STUDY API</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +29,7 @@
                             <a class="nav-link active myScale" aria-current="page" href="#user_id">Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active myScale" href="#chavruta_id">Chavruta</a>
+                            <a class="nav-link active myScale" href="#study_id">Toys</a>
                         </li>
                     </ul>
                 </div>
@@ -56,17 +39,29 @@
     <!-- header end -->
 
     <!-- main start -->
-    <main class="container-fluid pb-4">
+    <main class="container-fluid pb-4 ">
 
         <!-- table 1 -->
-        <div id="user_id" class="container table-responsive shadow p-2 ">
-            <p class="text-center text1"> By <b>log in</b> you can add, edit and remove your own toys , <b>Admin</b> has
-                the ability to delete and modify users and their toys. </p>
+        <div class="container" >
+            <div class="py-5 banner my-5">
+            </div>
+            <div id="user_id" class="text-center">
+                <h2 class="display-4 text-center pb-3  bg-dark text-white">Users - routes
+                </h2>
+            </div>
+        </div>
+
+        <div class="container table-responsive shadow p-2 ">
+            <p class="text-center text1"> By <b>log in</b> you can add, edit and remove your own study , <b>Admin</b>
+                has
+                the ability to delete and modify users and their study. </p>
             <table class="table table-bordered table-striped ">
+
+
                 <thead class="table-dark">
                     <tr>
 
-                        <th class="text-center" scope="col">#Method</th>
+                        <th class="text-center" scope="col">Method</th>
                         <th class="text-center" scope="col">URL</th>
                         <th class="text-center" scope="col">Body</th>
                         <th class="text-center" scope="col">Description</th>
@@ -75,79 +70,78 @@
                 <tbody>
                     <tr>
                         <td>GET</td>
-                        <td><a href="https://nodechavruta.onrender.com/users/myInfo">/users/myInfo</a></td>
+                        <td><a href="/users/myInfo">/users/myInfo</a></td>
                         <td class="text-center">none</td>
                         <td>Get your own info - by token.</td>
                     </tr>
                     <tr>
                         <td>GET</td>
-                        <td><a href="https://nodechavruta.onrender.comusers/usersList">/users/usersList</a></td>
+                        <td><a href="/users/usersList">/users/usersList</a></td>
                         <td class="text-center">none</td>
                         <td>Get list of all users - by token admin.</td>
                     </tr>
                     <tr>
-                        <td>GET</td>
-                        <td><a href="https://nodechavruta.onrender.comusers/single/need_to_put_id">/users/single/{id}</a></td>
-                        <td class="text-center">none</td>
-                        <td>Get list of single user - by id and token admin.</td>
-                    </tr>
-                    <tr>
                         <td>POST</td>
-                        <td><a href="https://nodechavruta.onrender.com/users/register">/users/register</a></td>
+                        <td>/users/register</td>
                         <td>
                             <pre>
 {
-    "name": "Rivky",
-    "email": "Rivky@gmail.com",
-    "password":"MyPassword123#"
-}                       </pre>
+  "name": "Shimi1",
+   "email": "Shimi1@gmail.com",
+   "password":"Shimi1@gmail.com"
+ }</pre>
                         </td>
-                        <td>Add a new user to the data base , for example the password must conatin capital and lowercase letter a number and special character
-                            <a class="text-decoration-none" href="https://github.com/RivkyShachar/nodeFinalProject/blob/main/models/userModel.js">if you want to see the full template of valid user.</a>
+                        <td>Add a new user to the data base <br>
+                            The name should contain at least 2 character. <br>
+                            the password must contain : 8 character , capital letter, special character. <br>
+                            The email must be valid.
                         </td>
                     </tr>
                     <tr>
-                        <td>POST</td>
-                        <td><a href="https://nodechavruta.onrender.com/users/login">/users/login</a></td>
+                        <td>POST (login)</td>
+                        <td>/users/login</td>
                         <td>
-                            <pre>{
-    "email": "Rivky@gmail.com",
-    "password":"MyPassword123#"
-}                           </pre>
+                            <pre>
+{
+"email": "Yael@gmail.com",
+"password": "Yael@gmail.com"
+} </pre>
                         </td>
-                        <td>Login, if the email and password are correct the server will respond with a token,<br>
-                            <a class="text-decoration-none" href="https://github.com/RivkyShachar/nodeFinalProject/blob/main/models/userModel.js">if
+                        <td>User login, if the email and password are correct the server will respond with a token,<br>
+                            <a class="text-decoration-none"
+                                href="https://github.com/MaorgD/ToysProject/blob/main/api/validation/userValidation.js">if
                                 you want to see the template of valid user.</a>
                         </td>
                     </tr>
                     <tr>
+                        <td>DELETE</td>
+                        <td><a href="/users/{idDel}"></a></td>
+                        <td></td>
+                        <td>Delete a user from the data base. <strong> Admin token can delete every user</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>DELETE</td>
+                        <td> <a href="/users/deleteAccount"></a></td>
+                        <td></td>
+                        <td>Delete a user from the data base. <strong>you need a valid token can't delete an admin
+                                user.</strong>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>PUT</td>
-                        <td><a href="https://nodechavruta.onrender.com/users/need_to_put_id">/users/{idEdit}</a></td>
-                        <td>
-                            <pre>
+                        <td><a href="/users/{idEdit}"></a> </td>
+
 {
-    "name": "Rivky Shachar",
-    "email": "Rivky@gmail.com",
-    "password":"MyPassword123#"
+    "name": "meni",
+    "email": "meni@gmail.com",
+    "password":"meni@gmail.com"
 }
                              </pre>
                         </td>
-                        <td>Update your user in the data base,<strong> Admin token can edit every user.</strong>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>DELETE</td>
-                        <td><a href="https://nodechavruta.onrender.com/users/{idDel}">/users/{idDel}</a></td>
-                        <td class="text-center">none</td>
-                        <td>Delete a user from the data base. <strong> You need a valid token.</strong>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>DELETE</td>
-                        <td><a href="https://nodechavruta.onrender.com/users/deleteAccount">/users/deleteAccount</a></td>
-                        <td class="text-center">none</td>
-                        <td>Delete a user from the data base. <strong> Admin token can delete every user , and user can
-                                delete only himself.</strong>
+                        <td>Update your user in the data base,<strong> Admin token can edit every user data , and user
+                                can
+                                edit only himself.</strong>
                         </td>
                     </tr>
                 </tbody>
@@ -155,7 +149,17 @@
         </div>
 
         <!-- table 2 -->
-        <div id="chavruta_id" class="container">
+        <div class="container">
+            <div id="study_id" class="text-center m-3">
+                <h2 class="display-4 text-center py-2 bg-dark text-white">
+                    Study - Routes
+                </h2>
+            </div>
+
+
+        </div>
+
+        <div class="container">
             <div class="row mb-4">
                 <p class="text-center text1">Some <b>"GET"</b> requests you can get information about the API,
                     By adding these <b>queries</b> you can see the edit</p>
@@ -170,6 +174,10 @@
 
         <div class="container table-responsive shadow py-2">
             <table class="table table-bordered table-striped mb-3">
+                <h4 class="mb-3 text-center bigDomain">Domain                   
+                    <span class="text-info text fw-bold" id="Domain">https://api-toys.cyclic.app</span>
+                    <button class="btn mx-2 copyBtn" id="domainbtn2"><i class="bi bi-files"></i></button>
+                </h4>
                 <thead class="table-dark">
                     <tr>
                         <th class="text-center" scope="col">#Method</th>
@@ -181,49 +189,62 @@
                 <tbody>
                     <tr>
                         <td>GET</td>
-                        <td><a href="https://nodechavruta.onrender.com/studyRequests/requestsList">/requestsList</a></td>
+                        <td><a href="https://api-toys.cyclic.app//toys">/study</a></td>
                         <td class="text-center">none</td>
-                        <td>Get a list of all the toys, will present 10 results per page.</td>
+                        <td>Get a list of all the study, will present 10 results per page.</td>
                     </tr>
                     <tr>
                         <td>GET</td>
-                        <td><a href="https://nodechavruta.onrender.com/studyRequests/myStudyRequests">/myStudyRequests</a></td>
+                        <td><a
+                                href="https://api-toys.cyclic.app/toys/search?s=doll">/studyRequests/search?topic=bible&language=english</a>
+                        </td>
                         <td class="text-center">none</td>
-                        <td>search for a toy by searching follwing name or info after the "s=", it will present 10
+                        <td>search for a study request by searching follwing name after the "s=", it will present 10
                             results per page.
                         </td>
                     </tr>
                     <tr>
                         <td>GET</td>
-                        <td><a href="https://nodechavruta.onrender.com/studyRequests/search">/search</a></td>
+                        <td><a
+                                href="https://api-toys.cyclic.app/toys/prices?min=50&max=200">/studyRequests/duration?min=12&max=25</a>
+                        </td>
                         <td class="text-center">none</td>
-                        <td>Get a list of the toys by min & max , it will present 10 results per page.</td>
+                        <td>Get a list of the study request by min & max hourse , it will present 10 results per page.
+                        </td>
                     </tr>
                     <tr>
-                        <td>GET מיותר</td>
-                        <td><a href="https://nodechavruta.onrender.comhttps://api-toys.cyclic.app/toys/category/doll">/toys/category/:catName</a></td>
+                        <td>GET</td>
+                        <td><a href="https://study-api-jppo.onrender.com/users/usersList">/studyRequests/topic/:topicName</a>
+                        </td>
                         <td class="text-center">none</td>
-                        <td>Get a list of all the toys in toys <strong>category</strong>, it will present 10 results per
-                            page.</td>
+                        <td>Get a list of all study requests according to the selected topic <strong>category</strong>,
+                            it will present 10 results per page.</td>
                     </tr>
                     <tr>
                         <td>POST</td>
-                        <td><a href="https://nodechavruta.onrender.com/studyRequests">/studyRequests</a></td>
+                        <td>/studyRequests</td>
                         <td>
                             <pre>
-
-{
-"name":"Fish Game Doll",
-"info":"Fish,Doll",
-"category":"Doll",
-"img_url":"Fish.jpg" ,
-"price":25
-}
-                                
-                              
-   </pre>
+"preferredHours": {
+"from": "2023-12-02T08:00:00.000Z",
+"to": "2023-12-02T10:00:00.000Z"
+},
+"studyDuration": {
+"min": 10,
+"max": 20
+},
+"_id": "656b5d83c3a887f96a5257cb",
+"topics": [
+"Math",
+"Physics"
+],
+"preferredLanguages": [
+"English"
+]                
+</pre>
                         </td>
-                        <td>Add a new toy to the data base, <strong>You need a token for this query ,</strong><br>
+                        <td>Add a new study request to the data base, <strong>You need a token for this query
+                                ,</strong><br>
                             <a class="text-decoration-none"
                                 href="https://github.com/MaorgD/ToysProject/blob/main/api/validation/toyValidation.js">if
                                 you want to see the template of valid toy</a>
@@ -231,25 +252,40 @@
                     </tr>
                     <tr>
                         <td>PUT</td>
-                        <td><a href="https://nodechavruta.onrender.com/studyRequests/{idEdit}">/studyRequests/{idEdit}</a></td>
+                        <td>/studyRequest/ID </td>
                         <td>
                             <pre>
+
 {
-"name":"Fish Game Doll",
-"info":"Fish,Doll",
-"category":"Doll",
-"img":"Fish.jpg" ,
-"price":25
+ "preferredHours": {
+     "from": "2023-12-02T08:00:00.000Z",
+     "to": "2023-12-02T10:00:00.000Z"
+ },
+ "studyDuration": {
+     "min": 10,
+     "max": 20
+ },
+ "_id": "656b5d83c3a887f96a5257cb",
+ "topics": [
+     "Math",
+     "Physics"
+ ],
+ "preferredLanguages": [
+     "English"
+ ]
 }
+    
    </pre>
                         </td>
-                        <td>Update a toy in the data base,<strong>You need a token for this query.</strong></td>
+                        <td>Update a study request in the data base,<strong>You need a token for this query.</strong>
+                        </td>
                     </tr>
                     <tr>
                         <td>DELETE</td>
-                        <td><a href="https://nodechavruta.onrender.com/studyRequests/{idDel}">/studyRequests/{idDel}</a></td>
+                        <td>/studyRequest/ID</td>
                         <td class="text-center">none</td>
-                        <td>Delete a toy from the data base, <strong>You need a token for this query.</strong></td>
+                        <td>Delete a study request from the data base, <strong>You need a token for this query.</strong>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -266,15 +302,16 @@
                     <use xlink:href="#bootstrap"></use>
                 </svg>
             </a>
-            <span class="mb-3 mb-md-0 text-muted">© 2023 , Rivky Shachar</span>
+            <span class="mb-3 mb-md-0 text-muted">© Yael Globerman, 2023 </span>
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex me-5">
-            <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-whatsapp"></i>
+            <li class="ms-3"><a class="text-muted" href="https://www.whatsapp.com/"><i class="bi bi-whatsapp"></i>
                 </a></li>
-            <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-linkedin"></i>
+            <li class="ms-3"><a class="text-muted" href="https://www.linkedin.com/"><i class="bi bi-linkedin"></i>
                 </a></li>
-            <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-github"></i>
+            <li class="ms-3"><a class="text-muted" href="https://github.com/MaorgD/ToysProject "><i
+                        class="bi bi-github"></i>
                 </a></li>
         </ul>
     </footer>

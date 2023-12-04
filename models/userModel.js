@@ -7,6 +7,9 @@ let userSchema = new mongoose.Schema({
     name: String,
     email: {type: String, unique: true},
     password: String,
+    img_url: {
+        type: String, default: "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
+    },
     date_created: {
         type: Date, default: Date.now()
     },
@@ -29,7 +32,8 @@ exports.validUser = (_reqBody) => {
     let joiSchema = Joi.object({
         name: Joi.string().min(2).max(99).required(),
         email: Joi.string().min(2).max(99).email().required(),
-        password: Joi.string().regex(passwordRegex).required()
+        password: Joi.string().regex(passwordRegex).required(),
+        img_url: Joi.string().max(500)
 
     })
 

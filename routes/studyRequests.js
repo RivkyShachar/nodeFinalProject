@@ -4,7 +4,7 @@ const { StudyRequestModel, validateStudyRequest } = require("../models/studyRequ
 const router = express.Router();
 
 router.get("/requestsList", authAdmin, async (req, res) => {
-    let perPage = Math.min(req.query.perPage, 20) || 4;
+    let perPage = Math.min(req.query.perPage, 20) || 10;
     let page = req.query.page || 1;
     let sort = req.query.sort || "_id";
     let reverse = req.query.reverse == "yes" ? -1 : 1;
@@ -26,7 +26,7 @@ router.get("/requestsList", authAdmin, async (req, res) => {
 
 // get all the requests that the user has posted - by token
 router.get("/myStudyRequests", auth, async (req, res) => {
-    let perPage = Math.min(req.query.perPage, 20) || 4;
+    let perPage = Math.min(req.query.perPage, 20) || 10;
     let page = req.query.page || 1;
     let sort = req.query.sort || "_id";
     let reverse = req.query.reverse == "yes" ? -1 : 1;

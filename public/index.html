@@ -59,6 +59,14 @@
     <main class="container-fluid pb-4">
 
         <!-- table 1 -->
+        <div class="container" >
+            <div class="py-5 banner my-5">
+            </div>
+            <div id="user_id" class="text-center">
+                <h2 class="display-4 text-center pb-3  bg-dark text-white">Users - routes
+                </h2>
+            </div>
+        </div>
         <div id="user_id" class="container table-responsive shadow p-2 ">
             <p class="text-center text1"> By <b>log in</b> you can add, edit and remove your own toys , <b>Admin</b> has
                 the ability to delete and modify users and their toys. </p>
@@ -132,7 +140,7 @@
 }
                              </pre>
                         </td>
-                        <td>Update your user in the data base,<strong> Admin token can edit every user.</strong>
+                        <td>Update your user in the data base,<strong> Admin token can edit every user data , and user can edit only himself.</strong>
                         </td>
                     </tr>
                     <tr>
@@ -146,7 +154,7 @@
                         <td>DELETE</td>
                         <td><a href="https://nodechavruta.onrender.com/users/deleteAccount">/users/deleteAccount</a></td>
                         <td class="text-center">none</td>
-                        <td>Delete a user from the data base. <strong> Admin token can delete every user , and user can
+                        <td>Delete a user from the data base. <strong> Admin token can delete every user that is not admin , and user can
                                 delete only himself.</strong>
                         </td>
                     </tr>
@@ -155,15 +163,23 @@
         </div>
 
         <!-- table 2 -->
+        <div class="container" >
+            <div class="py-5 banner my-5">
+            </div>
+            <div id="user_id" class="text-center">
+                <h2 class="display-4 text-center pb-3  bg-dark text-white">Stydy request - routes
+                </h2>
+            </div>
+        </div>
         <div id="chavruta_id" class="container">
             <div class="row mb-4">
-                <p class="text-center text1">Some <b>"GET"</b> requests you can get information about the API,
-                    By adding these <b>queries</b> you can see the edit</p>
+                <p class="text-center text1">Some <b>"GET"</b> requests allow you to retrieve information about study requests.
+                    You can use the following queries to customize your results:</p>
                 <ul>
-                    <li><strong>Per-Page :</strong> you can select the amount of obj per one page.</li>
-                    <li><strong>Page :</strong> you can select the num of pages you want.</li>
-                    <li><strong>Sort :</strong> you can select how to make your sort - by Price / ID / Name / Cat. </li>
-                    <li><strong>Reverse :</strong> you can choose the sort dirction.</li>
+                    <li><strong>PerPage:</strong> Specify the number of study requests per page.</li>
+                    <li><strong>Page:</strong> Navigate through different pages of study requests.</li>
+                    <li><strong>Sort:</strong> Define the sorting criteria (e.g., "_id", "topics").</li>
+                    <li><strong>Reverse:</strong> Choose the sorting direction.</li>
                 </ul>
             </div>
         </div>
@@ -183,28 +199,39 @@
                         <td>GET</td>
                         <td><a href="https://nodechavruta.onrender.com/studyRequests/requestsList">/requestsList</a></td>
                         <td class="text-center">none</td>
-                        <td>Get a list of all the toys, will present 10 results per page.</td>
+                        <td>Get a list of all the study, will present 10 results per page.</td>
                     </tr>
                     <tr>
                         <td>GET</td>
                         <td><a href="https://nodechavruta.onrender.com/studyRequests/myStudyRequests">/myStudyRequests</a></td>
                         <td class="text-center">none</td>
-                        <td>search for a toy by searching follwing name or info after the "s=", it will present 10
+                        <td>get all study requests that you posted - by token
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>GET</td>
+                        <td><a href="https://nodechavruta.onrender.com/studyRequests/search?topic=bible&language=english">/studyRequests/search?topic=bible&language=english</a></td>
+                        <td class="text-center">none</td>
+                        <td>search for a study request by searching follwing name after the "topic=" or "language=", it will present 10
                             results per page.
                         </td>
                     </tr>
                     <tr>
                         <td>GET</td>
-                        <td><a href="https://nodechavruta.onrender.com/studyRequests/search">/search</a></td>
+                        <td><a
+                                href="https://nodechavruta.onrender.com/studyRequests/duration?min=10&max=25">/studyRequests/duration?min=12&max=25</a>
+                        </td>
                         <td class="text-center">none</td>
-                        <td>Get a list of the toys by min & max , it will present 10 results per page.</td>
+                        <td>Get a list of the study request by min & max hourse , it will present 10 results per page.
+                        </td>
                     </tr>
                     <tr>
-                        <td>GET מיותר</td>
-                        <td><a href="https://nodechavruta.onrender.comhttps://api-toys.cyclic.app/toys/category/doll">/toys/category/:catName</a></td>
+                        <td>GET</td>
+                        <td><a href="https://nodechavruta.onrender.com/studyRequests/topic/bible">/studyRequests/topic/:topicName</a>
+                        </td>
                         <td class="text-center">none</td>
-                        <td>Get a list of all the toys in toys <strong>category</strong>, it will present 10 results per
-                            page.</td>
+                        <td>Get a list of all study requests according to the selected topic <strong>category</strong>,
+                            it will present 10 results per page.</td>
                     </tr>
                     <tr>
                         <td>POST</td>
@@ -213,48 +240,72 @@
                             <pre>
 
 {
-"name":"Fish Game Doll",
-"info":"Fish,Doll",
-"category":"Doll",
-"img_url":"Fish.jpg" ,
-"price":25
+    "preferredHours": {
+        "from": "2023-12-02T08:00:00.000Z",
+        "to": "2023-12-02T10:00:00.000Z"
+        },
+        "studyDuration": {
+        "min": 10,
+        "max": 20
+        },
+        "_id": "656b5d83c3a887f96a5257cb",
+        "topics": [
+        "Math",
+        "Physics"
+        ],
+        "preferredLanguages": [
+        "English"
+        ]  
 }
                                 
                               
    </pre>
                         </td>
-                        <td>Add a new toy to the data base, <strong>You need a token for this query ,</strong><br>
-                            <a class="text-decoration-none"
-                                href="https://github.com/MaorgD/ToysProject/blob/main/api/validation/toyValidation.js">if
-                                you want to see the template of valid toy</a>
-                        </td>
+                        <td>Add a new study request to the data base, <strong>You need a token for this query
+                            ,</strong><br>
+                        <a class="text-decoration-none"
+                            href="#">if
+                            you want to see the template of valid study request</a>
+                    </td>
                     </tr>
                     <tr>
                         <td>PUT</td>
-                        <td><a href="https://nodechavruta.onrender.com/studyRequests/{idEdit}">/studyRequests/{idEdit}</a></td>
+                        <td><a href="https://nodechavruta.onrender.com/studyRequests/need_to_put_id">/studyRequests/{idEdit}</a></td>
                         <td>
                             <pre>
 {
-"name":"Fish Game Doll",
-"info":"Fish,Doll",
-"category":"Doll",
-"img":"Fish.jpg" ,
-"price":25
-}
+    "preferredHours": {
+        "from": "2023-12-02T08:00:00.000Z",
+        "to": "2023-12-02T10:00:00.000Z"
+    },
+    "studyDuration": {
+        "min": 10,
+        "max": 20
+    },
+    "_id": "656b5d83c3a887f96a5257cb",
+    "topics": [
+        "Math",
+        "Physics"
+    ],
+    "preferredLanguages": [
+        "English"
+    ]
+   }
    </pre>
                         </td>
-                        <td>Update a toy in the data base,<strong>You need a token for this query.</strong></td>
+                        <td>Update a study request in the data base,<strong>Admin token can edit every user data , and user can edit only himself.</strong>
+                        </td>
                     </tr>
                     <tr>
                         <td>DELETE</td>
-                        <td><a href="https://nodechavruta.onrender.com/studyRequests/{idDel}">/studyRequests/{idDel}</a></td>
+                        <td><a href="https://nodechavruta.onrender.com/studyRequests/need_to_put_id">/studyRequests/{idDel}</a></td>
                         <td class="text-center">none</td>
-                        <td>Delete a toy from the data base, <strong>You need a token for this query.</strong></td>
+                        <td>Delete a study request from the data base, <strong>You need a token for this query.</strong>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
     </main>
     <!-- main end -->
 
@@ -279,7 +330,6 @@
         </ul>
     </footer>
     <!-- footer end -->
-
     <!-- js connect -->
     <script src="index.js"></script>
 

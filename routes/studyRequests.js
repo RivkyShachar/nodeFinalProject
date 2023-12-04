@@ -3,7 +3,7 @@ const { auth, authAdmin } = require("../middlewares/auth");
 const { StudyRequestModel, validateStudyRequest } = require("../models/studyRequestModel")
 const router = express.Router();
 
-router.get("/requestsList",authAdmin, async (req, res) => {
+router.get("/requestsList", authAdmin, async (req, res) => {
     let perPage = Math.min(req.query.perPage, 20) || 4;
     let page = req.query.page || 1;
     let sort = req.query.sort || "_id";
@@ -25,7 +25,7 @@ router.get("/requestsList",authAdmin, async (req, res) => {
 })
 
 // get all the requests that the user has posted - by token
-router.get("/myStudyRequests",auth, async (req, res) => {
+router.get("/myStudyRequests", auth, async (req, res) => {
     let perPage = Math.min(req.query.perPage, 20) || 4;
     let page = req.query.page || 1;
     let sort = req.query.sort || "_id";
@@ -33,7 +33,7 @@ router.get("/myStudyRequests",auth, async (req, res) => {
 
     try {
         let data = await StudyRequestModel
-            .find({user_id: req.tokenData._id})
+            .find({ user_id: req.tokenData._id })
             .limit(perPage)
             .skip((page - 1) * perPage)
             .sort({ [sort]: reverse })
@@ -50,31 +50,105 @@ router.get("/myStudyRequests",auth, async (req, res) => {
 router.get("/search", async (req, res) => {
     let perPage = req.query.perPage || 10;
     let page = req.query.page || 1;
-  
+
     try {
-      let queryT = req.query.topic;
-      let queryL = req.query.language;
-      let searchTopicReg = new RegExp(queryT, "i");
-      let searchLanguageReg = new RegExp(queryL, "i");
-  
-      let data = await StudyRequestModel.find({
-        $and: [
-          { topics: { $in: [searchTopicReg] } },
-          { preferredLanguages: { $in: [searchLanguageReg] } }
-        ]
-      })
+        let queryT = req.query.topic;
+        let queryL = req.query.language;
+        let searchTopicReg = new RegExp(queryT, "i");
+        let searchLanguageReg = new RegExp(queryL, "i");
+
+        let data = await StudyRequestModel.find({
+            $and: [
+                { topics: { $in: [searchTopicReg] } },
+                { preferredLanguages: { $in: [searchLanguageReg] } }
+            ]
+        })
+            .limit(perPage)
+            .skip((page - 1) * perPage)
+            .sort({ _id: -1 });
+
+        res.status(201).json(data);
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({ msg: "There was an error. Please try again later.", err });
+    }
+});
+
+router.get("/single/:idSingle1", auth, async (req, res) => {
+    try {
+        let idSingle = req.params.idSingle1;
+        let data = await UserModel.findOne({ _id: idSingle })
+        res.status(201).json(data);
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({ msg: "there error try again later", err })
+    }
+}
+)
+
+router.get("/duration", async (req, res) => {
+    let perPage = req.query.perPage || 10;
+    let page = req.query.page || 1;
+    let sort = req.query.sort || "price"
+    let reverse = req.query.reverse == "yes" ? -1 : 1;
+    try {
+        let minP = req.query.min;
+        let maxP = req.query.max;
+        if (minP && maxP) {
+            let data = await StudyRequestModel.find({ $and: [{ "studyDuration.min": { $gte: minP } }, { "studyDuration.max": { $lte: maxP } }] })
+
+                .limit(perPage)
+                .skip((page - 1) * perPage)
+                .sort({ [sort]: reverse })
+            res.json(data);
+        }
+        else if (maxP) {
+            let data = await StudyRequestModel.find({ "studyDuration.max": { $gte: maxP } })
+                .limit(perPage)
+                .skip((page - 1) * perPage)
+                .sort({ [sort]: reverse })
+            res.json(data);
+        } else if (minP) {
+            let data = await StudyRequestModel.find({ "studyDuration.min": { $gte: minP } })
+                .limit(perPage)
+                .skip((page - 1) * perPage)
+                .sort({ [sort]: reverse })
+            res.json(data);
+        } else {
+            let data = await StudyRequestModel.find({})
+                .limit(perPage)
+                .skip((page - 1) * perPage)
+                .sort({ [sort]: reverse })
+            res.json(data);
+        }
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({ msg: "there error try again later", err })
+    }
+})
+
+router.get("/topic/:topName", async (req, res) => {
+    let perPage = req.query.perPage || 10;
+    let page = req.query.page || 1;
+    try {
+      let topN = req.params.topName;
+      let topReg = new RegExp(topN, "i")
+      let data = await StudyRequestModel.find({ topics: { $in: [topReg] } })
         .limit(perPage)
         .skip((page - 1) * perPage)
-        .sort({ _id: -1 });
-  
-      res.status(201).json(data);
-    } 
+        .sort({ _id: -1 })
+      res.json(data);
+    }
     catch (err) {
       console.log(err);
-      res.status(500).json({ msg: "There was an error. Please try again later.", err });
+      res.status(500).json({ msg: "there error try again later", err })
     }
-  });
-
+  }
+  )
+  
 router.post("/", auth, async (req, res) => {
     let validBody = validateStudyRequest(req.body);
     if (validBody.error) {

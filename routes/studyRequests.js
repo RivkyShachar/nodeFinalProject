@@ -91,7 +91,7 @@ router.get("/single/:idSingle1", auth, async (req, res) => {
 router.get("/duration", async (req, res) => {
     let perPage = req.query.perPage || 10;
     let page = req.query.page || 1;
-    let sort = req.query.sort || "price"
+    let sort = req.query.sort || "_id"
     let reverse = req.query.reverse == "yes" ? -1 : 1;
     try {
         let minP = req.query.min;
@@ -126,7 +126,7 @@ router.get("/duration", async (req, res) => {
     }
     catch (err) {
         console.log(err);
-        res.status(500).json({ msg: "there error try again later", err })
+        res.status(500).json({ msg: "there is an error try again later", err })
     }
 })
 
@@ -144,7 +144,7 @@ router.get("/topic/:topName", async (req, res) => {
     }
     catch (err) {
       console.log(err);
-      res.status(500).json({ msg: "there error try again later", err })
+      res.status(500).json({ msg: "there is an error try again later", err })
     }
   }
   )

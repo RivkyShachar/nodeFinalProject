@@ -148,7 +148,7 @@ router.get("/topic/:topName", async (req, res) => {
     }
   }
   )
-  
+
 router.post("/", auth, async (req, res) => {
     let validBody = validateStudyRequest(req.body);
     if (validBody.error) {
